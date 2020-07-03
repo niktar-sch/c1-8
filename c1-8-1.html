@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>c1-8-1</title>
+</head>
+<body>
+
+<div id="div"><b>id</b>=<i>div</i></div>
+
+<div class="content"><b>class</b>=<i>content-1</i></div>
+<div class="content"><b>class</b>=<i>content-2</i></div>
+<div class="content"><b>class</b>=<i>content-3</i></div>
+<div class="content"><b>class</b>=<i>content-4</i></div>
+<div class="content"><b>class</b>=<i>content-5</i></div>
+
+</body>
+	<script type="text/javascript">
+		function jQuery (selector, context = document){
+			this.elements = Array.from(context.querySelectorAll(selector));
+			return this;
+		}
+
+		jQuery.prototype.each = function (fn){
+			this.elements.forEach((element, index) => fn.call(element, element, index));
+			return this;
+		}
+
+
+		jQuery.prototype.html = function(element = null) {
+		    if (element === null) {
+		        return this.elements.reduce((sum, current) => sum + current.innerHTML + '\n', '');
+		    }
+		    else {
+		        this.each(elem => elem.innerHTML = element);
+		        return this;
+		    }
+		}
+
+		const $ = (e) => new jQuery(e);
+
+		
+		console.log($('#div').html());
+
+		$('#div').html('<h1>Lorem ipsum</h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>');
+		
+		console.log($('#div').html());
+
+
+		console.log($('div.content').html());
+
+		$('div.content').html('<p>Lorem ipsum</p>');
+		
+		console.log($('div.content').html());
+
+	</script>
+</html>
